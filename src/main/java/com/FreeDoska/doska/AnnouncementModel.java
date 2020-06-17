@@ -1,4 +1,5 @@
 package com.FreeDoska.doska;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import javax.persistence.*;
@@ -6,6 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table
+//@Data
 @ToString(of = {"id", "nameAnnouncement"})
 @EqualsAndHashCode(of = {"id"})
 public class AnnouncementModel {
