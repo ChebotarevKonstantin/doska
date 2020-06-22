@@ -10,14 +10,14 @@ import java.time.LocalDateTime;
 @Entity
 @Table
 //@Data
-@ToString(of = {"id", "nameAnnouncement"})
+@ToString(of = {"id", "name"})
 @EqualsAndHashCode(of = {"id"})
 public class AnnouncementModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String nameAnnouncement;
-    private String textAnnouncement;
+    private String name;
+    private String text;
     private String category;
     private String subcategory;
     private String price;
@@ -25,7 +25,6 @@ public class AnnouncementModel {
 
     @Column(updatable = false)
     private LocalDateTime creationDate;
-
 
     public Long getId() {
         return id;
@@ -35,20 +34,20 @@ public class AnnouncementModel {
         this.id = id;
     }
 
-    public String getNameAnnouncement() {
-        return nameAnnouncement;
+    public String getName() {
+        return name;
     }
 
-    public void setNameAnnouncement(String nameAnnouncement) {
-        this.nameAnnouncement = nameAnnouncement;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTextAnnouncement() {
-        return textAnnouncement;
+    public String getText() {
+        return text;
     }
 
-    public void setTextAnnouncement(String textAnnouncement) {
-        this.textAnnouncement = textAnnouncement;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public String getCategory() {
@@ -91,3 +90,4 @@ public class AnnouncementModel {
         this.creationDate = creationDate;
     }
 }
+
