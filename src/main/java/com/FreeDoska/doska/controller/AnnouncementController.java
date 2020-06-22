@@ -1,4 +1,5 @@
 package com.FreeDoska.doska.controller;
+
 import com.FreeDoska.doska.AnnouncementModel;
 import com.FreeDoska.doska.controller.exceptions.NotFoundException;
 import com.FreeDoska.doska.repo.AnnouncementRepo;
@@ -12,12 +13,12 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-
-@RequestMapping("announcement")
+@RequestMapping("announcements")
 public class AnnouncementController {
 
-        private AnnouncementRepo announcementRepo;
-@Autowired
+    private final AnnouncementRepo announcementRepo;
+
+    @Autowired
     public AnnouncementController(AnnouncementRepo announcementRepo) {
         this.announcementRepo = announcementRepo;
     }
@@ -34,32 +35,25 @@ public class AnnouncementController {
 
 
     @PostMapping
-    public AnnouncementModel create(@RequestBody AnnouncementModel announcement){
+    public AnnouncementModel create(@RequestBody AnnouncementModel announcement) {
         return announcementRepo.save(announcement);
     }
+
     @PutMapping("{id}")
     public AnnouncementModel update(
             @PathVariable("id") AnnouncementModel announcementFromDb,
             @RequestBody AnnouncementModel announcement
-    ){
+    ) {
         BeanUtils.copyProperties(announcement, announcementFromDb, "id");
         return announcementRepo.save(announcement);
     }
+
     @DeleteMapping("{id}")
-    public void delete(@PathVariable("id") AnnouncementModel announcement){
-            announcementRepo.delete(announcement);
+    public void delete(@PathVariable("id") AnnouncementModel announcement) {
+        announcementRepo.delete(announcement);
 
     }
 }
-
-
-
-
-
-
-
-
-
 
 
 //    private int counter = 4;
