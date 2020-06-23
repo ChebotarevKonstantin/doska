@@ -3,6 +3,7 @@ package com.FreeDoska.doska.controller;
 import com.FreeDoska.doska.AnnouncementModel;
 import com.FreeDoska.doska.controller.exceptions.NotFoundException;
 import com.FreeDoska.doska.repo.AnnouncementRepo;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,7 @@ public class AnnouncementController {
     public List<AnnouncementModel> list() {
         return announcementRepo.findAll();
     }
+
 
     @GetMapping("{id}")
     public AnnouncementModel getOne(@PathVariable("id") AnnouncementModel announcement) {
