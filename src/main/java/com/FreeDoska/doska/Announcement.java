@@ -1,5 +1,6 @@
 package com.FreeDoska.doska;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -9,13 +10,15 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table
-//@Data
+@Data
 @ToString(of = {"id", "name"})
 @EqualsAndHashCode(of = {"id"})
-public class AnnouncementModel {
+public class Announcement {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+//    @JsonView(Views.Id.class)
     private Integer id;
+//    @JsonView(Views.IdName.class)
     private String name;
     private String text;
     private String category;

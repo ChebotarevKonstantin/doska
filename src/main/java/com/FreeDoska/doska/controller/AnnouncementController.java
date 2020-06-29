@@ -1,22 +1,17 @@
 package com.FreeDoska.doska.controller;
 
-import com.FreeDoska.doska.AnnouncementModel;
-import com.FreeDoska.doska.controller.exceptions.NotFoundException;
-import com.FreeDoska.doska.repo.AnnouncementRepo;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.FreeDoska.doska.Announcement;
+import com.FreeDoska.doska.repository.AnnouncementRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("announcements")
 public class AnnouncementController {
-
     private final AnnouncementRepo announcementRepo;
 
     @Autowired
@@ -25,33 +20,41 @@ public class AnnouncementController {
     }
 
     @GetMapping
-    public List<AnnouncementModel> list() {
+//    @JsonView(Views.IdName.class)
+    public List<Announcement> list() {
         return announcementRepo.findAll();
     }
 
 
     @GetMapping("{id}")
-    public AnnouncementModel getOne(@PathVariable("id") AnnouncementModel announcement) {
+//    @JsonView(Views.FullMessage.class)
+//    public Announcement getOne(@PathVariable("id") Announcement announcement) {
+//        return announcement;
+//    }
+    public Announcement getOne(@PathVariable("id") String id) {
+        Announcement announcement = this.announcementRepo.findById(Integer.parseInt(id)).get();
         return announcement;
     }
 
 
+
     @PostMapping
-    public AnnouncementModel create(@RequestBody AnnouncementModel announcement) {
+    public Announcement create(@RequestBody Announcement announcement) {
+        announcement.setCreationDate(LocalDateTime.now());
         return announcementRepo.save(announcement);
     }
 
     @PutMapping("{id}")
-    public AnnouncementModel update(
-            @PathVariable("id") AnnouncementModel announcementFromDb,
-            @RequestBody AnnouncementModel announcement
+    public Announcement update(
+            @PathVariable("id") Announcement announcementFromDb,
+            @RequestBody Announcement announcement
     ) {
         BeanUtils.copyProperties(announcement, announcementFromDb, "id");
-        return announcementRepo.save(announcement);
+        return announcementRepo.save(announcementFromDb);
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable("id") AnnouncementModel announcement) {
+    public void delete(@PathVariable("id") Announcement announcement) {
         announcementRepo.delete(announcement);
 
     }
