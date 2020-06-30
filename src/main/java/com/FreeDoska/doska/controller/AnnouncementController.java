@@ -58,6 +58,11 @@ public class AnnouncementController {
         announcementRepo.delete(announcement);
 
     }
+//    @RequestMapping(value = "/products")
+//    public String getProductName() {
+//        return "Honey";
+//
+//    }
 }
 
 
